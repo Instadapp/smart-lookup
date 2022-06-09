@@ -151,6 +151,7 @@ const tasks: Array<Task> = [
 ];
 
 const taskResults = ref([]);
+const error = ref("");
 
 const route = useRoute();
 const addressParam = String(route.params.address);
@@ -184,7 +185,7 @@ onMounted(async () => {
   }
 
   if (!address.value) {
-    // do something
+    error.value = "Invalid address or ENS name";
     return;
   }
 
@@ -250,7 +251,11 @@ onMounted(async () => {
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-xl">
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <div v-if="address" class="flex flex-col items-center">
+      <div v-if="error" class="flex items-center justify-center py-10">
+        <span class="font-semibold text-lg">{{ error }}</span>
+      </div>
+
+      <div v-else-if="address" class="flex flex-col items-center">
         <QrcodeVue
           :size="196"
           :value="address"
@@ -380,7 +385,7 @@ onMounted(async () => {
       </div>
 
       <div v-else class="flex items-center justify-center py-10">
-          <RefreshIcon class="w-10 h-10 animate-spin text-gray-600" />
+        <RefreshIcon class="w-10 h-10 animate-spin text-gray-600" />
       </div>
     </div>
   </div>
