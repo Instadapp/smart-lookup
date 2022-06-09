@@ -189,7 +189,7 @@ onMounted(async () => {
     return;
   }
 
-  if (address.value) {
+  if (address.value && !ens.value) {
     mainnetProvider
       .lookupAddress(address.value)
       .then(async (result) => {
