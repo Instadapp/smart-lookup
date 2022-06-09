@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { networkScanBaseUrl } from "~~/core";
 import QrcodeVue from "qrcode.vue";
 import {
   CheckIcon,
@@ -8,15 +9,6 @@ import {
 } from "@heroicons/vue/solid";
 
 const route = useRoute();
-
-const networkScanBaseUrl = {
-  mainnet: "https://etherscan.io/",
-  polygon: "https://polygonscan.com/",
-  avalanche: "https://snowtrace.io/",
-  fantom: "https://ftmscan.com/",
-  optimism: "https://optimistic.etherscan.io/",
-  arbitrum: "https://arbiscan.io/",
-};
 
 const statusIconBackground = {
   success: "bg-green-500",
@@ -147,6 +139,7 @@ const { address, ens, detectedNetworks, taskResults, error, shortAddress } =
                                     v-if="task.renderMetadataValue"
                                     :is="
                                       task.renderMetadataValue({
+                                        network,
                                         key,
                                         value,
                                       })
