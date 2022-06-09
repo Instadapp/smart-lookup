@@ -95,7 +95,7 @@ const tasks: Array<Task> = [
   },
 
   {
-    description: "This is an smart contract address",
+    description: "This is a smart contract address",
 
     statusStrategy: "some",
 
@@ -111,7 +111,7 @@ const tasks: Array<Task> = [
   },
 
   {
-    description: "This is an gnosis safe address",
+    description: "This is a gnosis safe address",
 
     statusStrategy: "some",
 
