@@ -12,12 +12,9 @@ const lookup = () => {
 </script>
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-xl">
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-      Smart Lookup
-    </h2>
 
     <div
-      class="mt-6 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex items-center gap-4"
+      class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex items-center gap-4"
     >
       <input
         v-model="address"

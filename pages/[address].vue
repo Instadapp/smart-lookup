@@ -17,6 +17,15 @@ const networks = {
   arbitrum: "https://rpc.ankr.com/arbitrum",
 };
 
+const networkScanBaseUrl = {
+  mainnet: "https://etherscan.io/",
+  polygon: "https://polygonscan.com/",
+  avalanche: "https://snowtrace.io/",
+  fantom: "https://ftmscan.com/",
+  optimism: "https://optimistic.etherscan.io/",
+  arbitrum: "https://arbiscan.io/",
+};
+
 const networkProviderMap = Object.keys(networks).reduce((acc, curr) => {
   acc[curr] = new ethers.providers.JsonRpcProvider(networks[curr]);
   return acc;
@@ -241,7 +250,7 @@ onMounted(async () => {
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-xl">
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <div class="flex flex-col items-center">
+      <div v-if="address" class="flex flex-col items-center">
         <QrcodeVue
           :size="196"
           :value="address"
@@ -260,12 +269,15 @@ onMounted(async () => {
 
         <div class="mt-3 w-full px-20" v-if="detectedNetworks.length">
           <div class="text-center flex flex-wrap justify-center gap-2">
-            <div
+            <a
               v-for="network in detectedNetworks"
               class="capitalize bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm shadow-sm"
+              :href="`${networkScanBaseUrl[network]}address/${address}`"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {{ network }}
-            </div>
+            </a>
           </div>
         </div>
 
@@ -365,6 +377,10 @@ onMounted(async () => {
             </ul>
           </div>
         </div>
+      </div>
+
+      <div v-else class="flex items-center justify-center py-10">
+          <RefreshIcon class="w-10 h-10 animate-spin text-gray-600" />
       </div>
     </div>
   </div>
