@@ -152,7 +152,21 @@ const shortenAddress = () => {
   return address.value.substr(0, 8) + "..." + address.value.substr(-6);
 };
 const ens = ref("");
-const detectedNetworks = ref(["mainnet", "polygon"]);
+const detectedNetworks = computed(() => [
+  ...new Set(
+    taskResults.value.flatMap(({ networkResults }) => {
+      if (networkResults) {
+        return Object
+        .keys(networkResults)
+        .filter(
+          (network) => !!networkResults[network].metadata
+        );
+      }
+
+      return [];
+    })
+  ),
+]);
 
 onMounted(async () => {
   if (!address.value) {
@@ -241,8 +255,8 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div class="mt-3">
-          <div class="text-center flex flex-wrap gap-2">
+        <div class="mt-3 w-full px-20" v-if="detectedNetworks.length">
+          <div class="text-center flex flex-wrap justify-center gap-2">
             <div
               v-for="network in detectedNetworks"
               class="capitalize bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm shadow-sm"
