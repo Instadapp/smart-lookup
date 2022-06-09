@@ -301,11 +301,11 @@ onMounted(async () => {
                       <span
                         :class="[
                           'bg-gray-400',
-                          'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white',
+                          'h-7 w-7 rounded-full flex items-center justify-center ring-8 ring-white',
                         ]"
                       >
                         <RefreshIcon
-                          class="h-5 w-5 text-white animate-spin"
+                          class="h-4 w-4 text-white animate-spin"
                           aria-hidden="true"
                         />
                       </span>
@@ -314,17 +314,17 @@ onMounted(async () => {
                       <span
                         :class="[
                           statusIconBackground[task.status],
-                          'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white',
+                          'h-7 w-7 rounded-full flex items-center justify-center ring-8 ring-white',
                         ]"
                       >
                         <component
                           :is="statusIcon[task.status]"
-                          class="h-5 w-5 text-white"
+                          class="h-4 w-4 text-white"
                           aria-hidden="true"
                         />
                       </span>
                     </div>
-                    <div class="min-w-0 flex-1 pt-1.5">
+                    <div class="min-w-0 flex-1 pt-1">
                       <div>
                         <p class="text-sm text-gray-500">
                           {{ task.description }}
