@@ -1,5 +1,5 @@
 <template>
-  <Html class="h-full">
+  <Html class="h-full bg-gray-50">
     <title>Smart Address Lookup | Instadapp</title>
     <meta charset="utf-8" />
     <meta
@@ -12,7 +12,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://smart-lookup.instadapp.io/" />
     <meta property="og:title" content="Smart Address Lookup | Instadapp" />
-    <meta property="og:image" content="https://smart-lookup.instadapp.io/logo.png" />
+    <meta
+      property="og:image"
+      content="https://smart-lookup.instadapp.io/logo.png"
+    />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary" />
