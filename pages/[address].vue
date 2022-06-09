@@ -338,7 +338,7 @@ onMounted(async () => {
                         </p>
                       </div>
                       <div
-                        class="ml-4 text-sm whitespace-nowrap text-gray-500 space-y-2"
+                        class="ml-2 sm:ml-4 text-sm whitespace-nowrap text-gray-500 space-y-2"
                       >
                         <template
                           v-for="(result, network) in task.networkResults"
@@ -356,7 +356,7 @@ onMounted(async () => {
                                   >:
 
                                   <div
-                                    class="ml-10"
+                                    class="ml-5 sm:ml-10"
                                     v-if="Array.isArray(value)"
                                   >
                                     <ul class="list-decimal">
