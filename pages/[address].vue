@@ -156,9 +156,7 @@ const detectedNetworks = computed(() => [
   ...new Set(
     taskResults.value.flatMap(({ networkResults }) => {
       if (networkResults) {
-        return Object
-        .keys(networkResults)
-        .filter(
+        return Object.keys(networkResults).filter(
           (network) => !!networkResults[network].metadata
         );
       }
@@ -179,6 +177,15 @@ onMounted(async () => {
   if (!address.value) {
     // do something
     return;
+  }
+
+  if (address.value) {
+    mainnetProvider
+      .lookupAddress(address.value)
+      .then(async (result) => {
+        ens.value = result;
+      })
+      .catch((err) => {});
   }
 
   for (let index = 0; index < tasks.length; index++) {
@@ -227,10 +234,6 @@ onMounted(async () => {
       ? "success"
       : "error";
     taskResults.value[index].loading = false;
-  }
-
-  if (address.value) {
-    ens.value = await mainnetProvider.lookupAddress(address.value);
   }
 });
 </script>
