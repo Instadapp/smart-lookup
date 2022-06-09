@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import { VNode } from "vue";
 
 const networks = {
     mainnet: "https://rpc.ankr.com/eth",
@@ -48,6 +49,8 @@ type Task = {
     networkResults?: {
         [network: string]: TaskCheckResponse;
     };
+    renderMetadata?: ({ network: string, metadata: object }) => VNode;
+    renderMetadataValue?: ({ key: string, value: any }) => VNode;
     statusStrategy?: "some" | "every";
     check: TaskCheckFun;
 };
@@ -125,13 +128,13 @@ const tasks: Array<Task> = [
 
 export function useLookup(addressOrEnsName: string) {
 
-    const taskResults = ref([]);
+    const taskResults = ref<Array<{ loading: boolean, description: string, networkResults: Task['networkResults'], renderMetadata: Task['renderMetadata'], renderMetadataValue: Task['renderMetadataValue'], status: TaskCheckResponse['status'] }>>([]);
     const error = ref("");
     const mainnetProvider = new ethers.providers.JsonRpcProvider(networks.mainnet);
 
     const address = ref(ethers.utils.isAddress(addressOrEnsName) ? addressOrEnsName : "");
     const shortAddress = computed(() => address.value ? address.value.substr(0, 8) + "..." + address.value.substr(-6) : "");
-    
+
     const ens = ref("");
     const detectedNetworks = computed(() => [
         ...new Set(
@@ -195,6 +198,8 @@ export function useLookup(addressOrEnsName: string) {
                     },
                 },
                 status: "success",
+                renderMetadata: task.renderMetadata,
+                renderMetadataValue: task.renderMetadataValue,
                 loading: true,
             });
 

@@ -30,7 +30,8 @@ const statusIcon = {
   warning: ExclamationIcon,
 };
 
-const { address, ens, detectedNetworks, taskResults, error, shortAddress } = useLookup(String(route.params.address));
+const { address, ens, detectedNetworks, taskResults, error, shortAddress } =
+  useLookup(String(route.params.address));
 </script>
 
 <template>
@@ -113,13 +114,6 @@ const { address, ens, detectedNetworks, taskResults, error, shortAddress } = use
                       <div>
                         <p class="text-sm text-gray-500">
                           {{ task.description }}
-
-                          <span
-                            v-if="task.network"
-                            class="text-gray-500 text-sm"
-                          >
-                            ({{ task.network }})
-                          </span>
                         </p>
                       </div>
                       <div
@@ -133,16 +127,34 @@ const { address, ens, detectedNetworks, taskResults, error, shortAddress } = use
                               {{ network }}
                             </div>
                             <div class="ml-4 sm:ml-6">
-                              <ul class="space-y-2 list-disc">
+                              <component
+                                v-if="task.renderMetadata"
+                                :is="
+                                  task.renderMetadata({
+                                    network,
+                                    metadata: result.metadata,
+                                  })
+                                "
+                              />
+                              <ul v-else class="space-y-2 list-disc">
                                 <li v-for="(value, key) in result.metadata">
                                   <span class="font-semibold capitalize">{{
                                     key
                                   }}</span
                                   >:
 
+                                  <component
+                                    v-if="task.renderMetadataValue"
+                                    :is="
+                                      task.renderMetadataValue({
+                                        key,
+                                        value,
+                                      })
+                                    "
+                                  />
                                   <div
                                     class="ml-8 sm:ml-10"
-                                    v-if="Array.isArray(value)"
+                                    v-else-if="Array.isArray(value)"
                                   >
                                     <ul class="list-decimal">
                                       <li v-for="val in value">
