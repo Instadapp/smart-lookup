@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Smart Address Lookup
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Open source tool to look up and validate addresses before making any transaction, to abstain from sending funds to an incorrect address to avoid colossal damage.
 
 ## Setup
 
