@@ -343,11 +343,11 @@ onMounted(async () => {
                         <template
                           v-for="(result, network) in task.networkResults"
                         >
-                          <div v-if="result.metadata">
+                          <div v-if="result.metadata" class="mt-1">
                             <div class="capitalize text-bold">
                               {{ network }}
                             </div>
-                            <div class="ml-4">
+                            <div class="ml-4 sm:ml-6">
                               <ul class="space-y-2 list-disc">
                                 <li v-for="(value, key) in result.metadata">
                                   <span class="font-semibold capitalize">{{
@@ -356,7 +356,7 @@ onMounted(async () => {
                                   >:
 
                                   <div
-                                    class="ml-5 sm:ml-10"
+                                    class="ml-8 sm:ml-10"
                                     v-if="Array.isArray(value)"
                                   >
                                     <ul class="list-decimal">
